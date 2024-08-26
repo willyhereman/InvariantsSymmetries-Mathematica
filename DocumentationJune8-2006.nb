@@ -1,0 +1,2017 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     45009,       1415]*)
+(*NotebookOutlinePosition[     54767,       1706]*)
+(*  CellTagsIndexPosition[     54417,       1691]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(First, \ 
+    set\ the\ directory\ so\ that\ Mathematica\ knows\ where\ to\ get\ \ the\ \
+code . \ For\ \(\(example\)\(:\)\)\)\)\)], "Input"],
+
+Cell[BoxData[
+    \(SetDirectory["\<d:\\invarsym\\testing\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(Second, \ 
+    load\ the\ package . \ 
+        The\ command\ below\ will\ generate\ two\ messages\ \ \((one\ will\ \
+say\ that\ the\ package\ was\ successfully\ loaded)\)\)], "Input"],
+
+Cell[BoxData[
+    \(Get["\<InvariantsSymmetries.m\>"]\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(\(\(\ \ \ \ \ \ \ \)\(The\ code\ has\ been\ updated\ on\ October\ 23, 
+    2005. \ \[IndentingNewLine]
+    \ \ \ \ \ \ \ Reason : \ 
+      make\ the\ code\ compatible\ with\ Mathematica\ v . \ 
+          5.0\ and\ 5.1 . \ \[IndentingNewLine]This\ notebook\ has\ been\ \
+updated\ on\ June\ 7, 2006. \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["\[Copyright] Copyright Notice", "Section",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  AspectRatioFixed->True,
+  CellTags->"Copyright"],
+
+Cell[TextData[{
+  "Copyright \[Copyright] by Unal Goktas and Willy Hereman (Department of \
+Mathematical and Computer Sciences, Colorado School of Mines, Golden, \
+Colorado, USA). No part of the ",
+  StyleBox["Integrability ",
+    FontSlant->"Italic"],
+  "package can be sold or reproduced without written consent of the authors. \
+",
+  ButtonBox["Wolfram Research",
+    ButtonData:>{
+      URL[ "http://www.wolfram.com"], None},
+    ButtonStyle->"Hyperlink"],
+  ", Inc. (Champaign, Illinois, USA) is the holder of the copyright to the ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " software system."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Copyright"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "About the Package: ",
+  StyleBox["Integrability",
+    FontFamily->"Helvetica",
+    FontSlant->"Italic"]
+}], "Section",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->0,
+  AspectRatioFixed->True,
+  CellTags->"Introduction"],
+
+Cell[TextData[{
+  "Nonlinear partial differential equations (PDEs) and differential \
+difference equations (DDEs) possess a number of remarkable properties \
+reflecting their rich mathematical structure. Such properties include the \
+Painleve property, nontrivial prolongation and bi-Hamiltonian structures, \
+soliton solutions, Lax pairs, Backlund transformations, symmetries and \
+conservation laws (which we call invariants). They reveal the adequacy of \
+PDEs and DDEs as models for physical relevant phenomena. The search for these \
+intrinsic properties becomes more attractive due to the availability of CAS \
+such as ",
+  StyleBox["Mathematica.",
+    FontSlant->"Italic"],
+  " Indeed, ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " is well suited and often necessary tool to perform the computations \
+inherent in the investigation of integrability."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->0,
+  AspectRatioFixed->True,
+  CellTags->"Introduction"],
+
+Cell[TextData[{
+  StyleBox["Integrability ",
+    FontSlant->"Italic"],
+  "is a collection of ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " functions addressing computations of invariants and symmetries in \
+analyzing nonlinear PDEs and DDEs. The main topics covered in the ",
+  StyleBox["Integrability",
+    FontSlant->"Italic"],
+  " package are as follows:\n\[FilledVerySmallSquare] Computations of \
+invariants (that is conservation laws) for systems of nonlinear PDEs and \
+DDEs,\n\[FilledVerySmallSquare] Computations of symmetries for systems of \
+nonlinear PDEs and DDEs."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->0,
+  AspectRatioFixed->True,
+  CellTags->"Introduction"],
+
+Cell[TextData[{
+  "A complete set of mathematical definitions and the concepts used in the \
+package and this manual are beyond the scope of this document. For the formal \
+definitions of the concepts and the theory behind the functions in the ",
+  StyleBox["Integrability",
+    FontSlant->"Italic"],
+  " package, consult the references given in the References section. In this \
+manual, a basic knowledge of ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " is assumed. For further information on ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ", consult the standard ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " reference: ",
+  StyleBox["The Mathematica Book",
+    FontSlant->"Italic"],
+  ",  Stephen Wolfram, Third Edition, Wolfram Media and Cambridge University \
+Press, 1996."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->0,
+  AspectRatioFixed->True,
+  CellTags->"Introduction"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Organization of the Package and Functionality", "Section",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  AspectRatioFixed->True,
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  "The package ",
+  StyleBox["Integrability",
+    FontSlant->"Italic"],
+  " consists of the following  M",
+  StyleBox["athematica",
+    FontSlant->"Italic"],
+  " packages.  "
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["InvariantsSymmetries.m", "cb",
+    FontWeight->"Bold"],
+  StyleBox[" ",
+    FontWeight->"Bold"],
+  "\t       Computations of invariants and symmetries of PDEs and DDEs\n",
+  StyleBox["init.m\t                                           ",
+    FontWeight->"Bold"],
+  "Function declarations"
+}], "Text",
+  CellFrame->True,
+  CellMargins->{{10.75, 24.125}, {0, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  FontSlant->"Plain",
+  FontTracking->"Plain",
+  FontVariations->{"Underline"->False,
+  "Outline"->False,
+  "Shadow"->False},
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["Packages and file names in ",
+    FontFamily->"Helvetica",
+    FontSize->9],
+  StyleBox["Integrability",
+    FontFamily->"Helvetica",
+    FontSize->9,
+    FontSlant->"Italic"]
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {10, 0}},
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  FrameBoxOptions->{BoxMargins->{{0.4, 0.4}, {0, 0}}},
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["PDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["eqn, u, {x, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the invariant with rank R of a partial differential equation for \
+the function u.\n",
+  StyleBox["PDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {x, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["] ",
+    FontWeight->"Bold"],
+  "finds the invariant of a system of partial differential equations.\n",
+  StyleBox["PDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {x, t}, {Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["] ",
+    FontWeight->"Bold"],
+  "finds the invariants with rank 0 through Rmax.\n",
+  StyleBox["PDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {x, t}, {Rmin, Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the invariants with rank Rmin through Rmax.\n",
+  StyleBox["PDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["eqn, u, {x, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetry with rank R of a partial differential equation for the \
+function u.\n",
+  StyleBox["PDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {x, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetry of a system of partial differential equations, where R \
+is the rank of the first equation in the desired symmetry.\n",
+  StyleBox["PDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {x, t}, {Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetries with rank 0 through Rmax.\n",
+  StyleBox["PDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {x, t}, {Rmin, Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetries with rank Rmin through Rmax.\nx is understood as the \
+space variable and t as the time variable."
+}], "Text",
+  CellFrame->True,
+  CellMargins->{{10.75, 24.125}, {0, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  FontSlant->"Plain",
+  FontTracking->"Plain",
+  FontVariations->{"Underline"->False,
+  "Outline"->False,
+  "Shadow"->False},
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["Functions for the analysis of PDEs in ",
+    FontFamily->"Helvetica",
+    FontSize->9],
+  StyleBox["Integrability",
+    FontFamily->"Helvetica",
+    FontSize->9,
+    FontSlant->"Italic"]
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {10, 0}},
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  FrameBoxOptions->{BoxMargins->{{0.4, 0.4}, {0, 0}}},
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["DDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["eqn, u, {n, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the invariant with rank R of a differential difference equation for \
+the function u.\n",
+  StyleBox["DDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {n, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the invariant of a system of differential difference equations. \n",
+  
+  StyleBox["DDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {n, t}, {Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the invariants with rank 0 through Rmax. \n",
+  StyleBox["DDEInvariants[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {n, t}, {Rmin, Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the invariants with rank Rmin through Rmax. \n",
+  StyleBox["DDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["eqn, u, {n, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetry with rank R of a differential difference equation for \
+the function u.\n",
+  StyleBox["DDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {n, t}, R, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetry of a system of differential difference equations, \
+where R is the rank of the first equation in the desired symmetry.\n",
+  StyleBox["DDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {n, t}, {Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetries with rank 0 through Rmax.\n",
+  StyleBox["DDESymmetries[",
+    FontWeight->"Bold"],
+  StyleBox["{eqn1, eqn2, ...}, {u1, u2, ...}, {n, t}, {Rmin, Rmax}, opts",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["]",
+    FontWeight->"Bold"],
+  " finds the symmetries with rank Rmin through Rmax.\nn is understood as the \
+discrete space variable and t as the time variable."
+}], "Text",
+  CellFrame->True,
+  CellMargins->{{10.75, 24.125}, {0, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  FontSlant->"Plain",
+  FontTracking->"Plain",
+  FontVariations->{"Underline"->False,
+  "Outline"->False,
+  "Shadow"->False},
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["Functions for the analysis of DDEs in ",
+    FontFamily->"Helvetica",
+    FontSize->9],
+  StyleBox["Integrability",
+    FontFamily->"Helvetica",
+    FontSize->9,
+    FontSlant->"Italic"]
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {10, 0}},
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  FrameBoxOptions->{BoxMargins->{{0.4, 0.4}, {0, 0}}},
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["Options[PDEInvariants]",
+    FontWeight->"Bold"],
+  " = ",
+  StyleBox["Options[DDEInvariants]",
+    FontWeight->"Bold"],
+  " = ",
+  StyleBox["Options[PDESymmetries]",
+    FontWeight->"Bold"],
+  " = ",
+  StyleBox["Options[DDESymmetries]",
+    FontWeight->"Bold"],
+  " =                              {WeightRules->{},WeightedParameters -> {}, \
+MaxExplicitDependency -> 0, UndeterminedCoefficients -> C}\t\n",
+  StyleBox["WeightRules",
+    FontWeight->"Bold"],
+  " is an option that determines the rules for weights of the variables. If \
+WeightRules ->{Weight[u] -> val, ...}, then scaling properties are determined \
+under these rules. There is a built in checking mechanism to see if the given \
+rules cause inconsistency.\:f3b5\n",
+  StyleBox["WeightedParameters",
+    FontWeight->"Bold"],
+  " is an option that determines the parameters with weight. If \
+WeightedParameters -> {p1, p2, ...}, then p1, p2,.... are considered as \
+constant parameters with weight. The default is WeightedParameters -> {}.\n",
+  StyleBox["MaxExplicitDependency",
+    FontWeight->"Bold"],
+  " is an option in finding the invariant and generalized symmetries of PDEs \
+and DDEs. If MaxExplicitDependency-> Max_Integer, then program allows \
+explicit dependency of independent variables of maximum degree of Max. The \
+default is MaxExplicitDependency -> 0.\n",
+  StyleBox["UndeterminedCoefficients",
+    FontWeight->"Bold"],
+  " is an option that determines the name of the constant coefficients to \
+use. The default is UndeterminedCoefficients ->C.\:f3b5"
+}], "Text",
+  CellFrame->True,
+  CellMargins->{{10.75, 24.125}, {0, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  FontSlant->"Plain",
+  FontTracking->"Plain",
+  FontVariations->{"Underline"->False,
+  "Outline"->False,
+  "Shadow"->False},
+  CellTags->"Organization"],
+
+Cell[TextData[{
+  StyleBox["Options of functions in ",
+    FontFamily->"Helvetica",
+    FontSize->9],
+  StyleBox["Integrability",
+    FontFamily->"Helvetica",
+    FontSize->9,
+    FontSlant->"Italic"]
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {10, 0}},
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  FrameBoxOptions->{BoxMargins->{{0.4, 0.4}, {0, 0}}},
+  CellTags->"Organization"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(IMPORTANT\ \(\(NOTE\)\(:\)\(\ \)\)\)\)\)], \
+"Input"],
+
+Cell[BoxData[{
+    \(The\ user\ does\ not\ have\ to\ install\ the\ package\ Integrability\ \
+to\ be\ able\ to\ use\ it . \ The\ core\ code\ is\), "\[IndentingNewLine]", 
+    \(in\ the\ file\ InvariantsSymmetries . m . \ Therefore, \ 
+    the\ \ Sections\ \((below)\)\ on\ Loading\ the\ Package\ and\ Palettes\ \
+can\ be\ skipped, \ 
+    provided\ \ the\ two\ Mathematica\ commands\ for\ setting\ the\ Directory\
+\ and\ loading\ the\ file\ InvariantsSymmetries . 
+        m\ via\ the\ Set\ command\ \((at\ the\ top\ of\ this\ notebook)\)\ \
+have\ been\ executed . \ \[IndentingNewLine]So, \ 
+    go\ to\ the\ section\ with\ Examples\ and\ execute\ the\ commands\ one\ \
+by\ \(\(one\)\(.\)\(\ \)\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Loading the Package", "Section",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  AspectRatioFixed->True,
+  CellTags->"Loading"],
+
+Cell[TextData[{
+  "To access all of the functions in ",
+  StyleBox["Integrability",
+    FontSlant->"Italic"],
+  ", all you need to do is to load the file ",
+  StyleBox["Integrability`init.m`",
+    FontWeight->"Bold"],
+  " by typing the following line in a ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " 3.0 notebook:"
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Loading"],
+
+Cell["<<Integrability`", "Input",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  AspectRatioFixed->True,
+  CellTags->"Loading"],
+
+Cell["\<\
+or simply, click at the following button \"Load Integrability\" in the help \
+browser entry for the package. Note that this button can be copy-and-pasted \
+in a notebook without losing its function.\
+\>", "Text",
+  CellTags->"Loading"],
+
+Cell[BoxData[
+    RowBox[{"       ", 
+      TagBox[
+        ButtonBox[\(Load\ Integrability\),
+          ButtonFunction:>CompoundExpression[ 
+              Get[ "Integrability`"]],
+          ButtonEvaluator->Automatic,
+          Active->True],
+        DisplayForm]}]], "Input",
+  CellTags->"Loading"],
+
+Cell[TextData[{
+  "Once ",
+  StyleBox["Integrability`init.m`",
+    FontWeight->"Bold"],
+  " is loaded, the package will be automatically loaded when a function in \
+the package is called from the ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " environment. So, in addition to the execution time of a function, some \
+delay will occur when a package is first loaded."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Loading"],
+
+Cell[TextData[{
+  "If the directory in which the package is located is not on the ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " ",
+  StyleBox["$Path",
+    FontWeight->"Bold"],
+  ", a warning message will be generated. To solve this problem, the \
+directory containing the package should be included on the path ",
+  StyleBox["$Path",
+    FontWeight->"Bold"],
+  ". The following ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " command puts the directory ",
+  StyleBox["dir",
+    FontSlant->"Italic"],
+  " on your path."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Loading"],
+
+Cell["AppendTo[$Path,\"dir\"]", "Input",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  AspectRatioFixed->True,
+  CellTags->"Loading"],
+
+Cell[TextData[{
+  "It is customary to place the packages in a subdirectory called \
+Applications (APPS under MS-DOS or Microsoft Windows), found under the ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " root directory. In ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " 3.0, the canonical location for applications packages is the directory \
+AddOns/Applications. Since the path to this directory is included in ",
+  StyleBox["$Path",
+    FontWeight->"Bold"],
+  ", the user need not to set a path for the packages placed in \
+AddOns/Applications."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Loading"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["Palettes",
+  ButtonData:>{"IntegrabilityPalettes.nb", None},
+  ButtonStyle->"Hyperlink",
+  ButtonNote->None]], "Section",
+  CellTags->"Palettes"],
+
+Cell[TextData[{
+  "Use the above hyperlink to get the designed palettes for the ",
+  StyleBox["Integrability",
+    FontSlant->"Italic"],
+  " package."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Palettes"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "Section",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Examples"],
+
+Cell["\<\
+If you haven't allready loaded the package, load it now by clicking \
+at the following  button.\
+\>", "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    RowBox[{"       ", 
+      TagBox[
+        ButtonBox[\(Load\ Integrability\),
+          ButtonFunction:>CompoundExpression[ 
+              Get[ "Integrability`"]],
+          ButtonEvaluator->Automatic,
+          Active->True],
+        DisplayForm]}]], "Input",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[CellGroupData[{
+
+Cell["Korteweg-de Vries (KdV) Equation", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(\(kdv := \[PartialD]\_t u[x, t] + 
+            u[x, t]\ \[PartialD]\_x u[x, t] + \[PartialD]\_{x, 3}u[x, t] == 
+          0;\)\)], "Input",
+  CellLabel->"In[3]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(TableForm[PDEInvariants[kdv, u, {x, t}, {1, 8}], 
+      TableHeadings -> {None, {"\<Rank\>", "\<Invariant\>"}}]\)], "Input",
+  CellLabel->"In[4]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+PDEInvariants[kdv,u,{x,t},1,MaxExplicitDependency->1] //TableForm\
+\>", "Input",
+  CellLabel->"In[5]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+TableForm[PDESymmetries[kdv,u,{x,t},{9}],TableHeadings->{None,{\"Rank\",\"\
+Symmetry\"}}]\
+\>", "Input",
+  CellLabel->"In[6]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDESymmetries[kdv,u,{x, t},2,MaxExplicitDependency->1]", "Input",
+  CellLabel->"In[7]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDESymmetries[kdv,u,{x, t},0,MaxExplicitDependency->1]", "Input",
+  CellLabel->"In[8]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Boussinesq Equation", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(pde1 := \[PartialD]\_t u[x, t] + \[PartialD]\_x v[x, t] == 
+          0;\)\), "\n", 
+    \(\(pde2 := \[PartialD]\_t v[x, t] + \[PartialD]\_x u[x, t] - 
+            3\ u[x, t]\ \[PartialD]\_x u[x, 
+                  t] - \[Alpha]\ \[PartialD]\_{x, 3}u[x, t] == 
+          0;\)\)}], "Input",
+  CellLabel->"In[9]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(PDEInvariants[{pde1, pde2}, {u, v}, {x, t}, {2, 6}]\)], "Input",
+  CellLabel->"In[11]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Nonlinear Schrodinger (NLS) Equation", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(pde1 := \[PartialD]\_t q[x, t] - \[PartialD]\_{x, 2}q[x, t] + 
+            2\ q[x, t]\^2\ r[x, t] == 0;\)\), "\n", 
+    \(\(pde2 := \[PartialD]\_t r[x, t] + \[PartialD]\_{x, 2}r[x, t] - 
+            2\ r[x, t]\^2\ q[x, t] == 0;\)\)}], "Input",
+  CellLabel->"In[12]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDEInvariants[{pde1,pde2},{q,r},{x,t},{2,5}]", "Input",
+  CellLabel->"In[14]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+PDEInvariants[{pde1,pde2},{q,r},{x,t},{2,5},WeightRules->{Weight[q]->Weight[r]\
+}]\
+\>", "Input",
+  CellLabel->"In[15]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Non-dispersive Long Wave System", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(pde1 := \[PartialD]\_t u[x, t] + u[x, t]\ \[PartialD]\_x v[x, t] + 
+            v[x, t]\ \[PartialD]\_x u[x, t] == 0;\)\), "\n", 
+    \(\(pde2 := \[PartialD]\_t v[x, t] + \[PartialD]\_x u[x, t] + 
+            v[x, t]\ \[PartialD]\_x v[x, t] == 0;\)\)}], "Input",
+  CellLabel->"In[16]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDEInvariants[{pde1,pde2},{u,v},{x,t},{1,5}]", "Input",
+  CellLabel->"In[18]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+PDEInvariants[{pde1,pde2},{u,v},{x,t},{1,5},WeightRules->{Weight[u]->2}]\
+\>", "Input",
+  CellLabel->"In[19]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Ibragimov-Shabat System", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(pde1 := \[PartialD]\_t u[x, t] - \[PartialD]\_{x, 2}u[x, t] - 
+            1\/2\ v[x, t]\^2 == 0;\)\), "\n", 
+    \(\(pde2 := \[PartialD]\_t v[x, t] - 2\ \[PartialD]\_{x, 2}v[x, t] == 
+          0;\)\)}], "Input",
+  CellLabel->"In[20]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDEInvariants[{pde1,pde2},{u,v},{x,t},{6}]", "Input",
+  CellLabel->"In[22]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+PDEInvariants[{pde1,pde2},{u,v},{x,t},{6},WeightRules->{Weight[v]->2}]\
+\>", "Input",
+  CellLabel->"In[23]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+PDESymmetries[{pde1,pde2},{u,v},{x,t},{5,7},WeightRules->{Weight[v]->2}]//\
+TableForm\
+\>", "Input",
+  CellLabel->"In[24]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Burgers Equation", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(\(burgers := \[PartialD]\_t u[x, t] - 
+            2\ u[x, t]\ \[PartialD]\_x u[x, t] - \[PartialD]\_{x, 2}u[x, t] == 
+          0;\)\)], "Input",
+  CellLabel->"In[25]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDEInvariants[burgers,u,{x,t},{1,4}]", "Input",
+  CellLabel->"In[26]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDESymmetries[burgers,u,{x,t},{4,6}]//TableForm", "Input",
+  CellLabel->"In[27]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Family of Fifth-order KdV Equations", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(\(pde := \[PartialD]\_t u[x, 
+                t] + \[Alpha]\ u[x, t]\^2\ \[PartialD]\_x u[x, 
+                  t] + \[Beta]\ \[PartialD]\_x u[x, t]\ \[PartialD]\_{x, 2}u[
+                  x, t] + \[Gamma]\ u[x, 
+                t]\ \[PartialD]\_{x, 3}u[x, t] + \[PartialD]\_{x, 5}u[x, t] == 
+          0;\)\)], "Input",
+  CellLabel->"In[28]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDEInvariants[pde,u,{x,t},{2,10}];", "Input",
+  CellLabel->"In[29]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+TableForm[%,TableHeadings->{None,{\"Rank\",\"Condition - Density\"}}]\
+\>", "Input",
+  CellLabel->"In[30]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDESymmetries[pde,u,{x,t},9];", "Input",
+  CellLabel->"In[31]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["\<\
+TableForm[%,TableHeadings->{None,{\"Rank\",\"Condition-Symmetry\"}}]\
+\>", "Input",
+  CellLabel->"In[32]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Hirota-Satsuma System", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(pde1 := \[PartialD]\_t u[x, t] - 
+            6\ \[Alpha]\ u[x, t]\ \[PartialD]\_x u[x, t] + 
+            6\ v[x, t]\ \[PartialD]\_x v[x, 
+                  t] - \[Alpha]\ \[PartialD]\_{x, 3}u[x, t] == 0;\)\), "\n", 
+    \(\(pde2 := \[PartialD]\_t v[x, t] + 
+            3\ u[x, t]\ \[PartialD]\_x v[x, t] + \[PartialD]\_{x, 3}v[x, t] == 
+          0;\)\)}], "Input",
+  CellLabel->"In[33]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["PDEInvariants[{pde1,pde2},{u,v},{x,t},{2,8}]//TableForm", "Input",
+  CellLabel->"In[35]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(PDESymmetries[{pde1, pde2}, {u, v}, {x, t}, 7]\  // 
+      TableForm\)], "Input",
+  CellLabel->"In[36]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Toda lattice", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(dde1 := \[PartialD]\_t u[n, t] - v[n - 1, t] + v[n, t] == 
+          0;\)\), "\n", 
+    \(\(dde2 := \[PartialD]\_t v[n, t] - 
+            v[n, t]\ \((u[n, t] - u[n + 1, t])\) == 0;\)\)}], "Input",
+  CellLabel->"In[6]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(DDEInvariants[{dde1, dde2}, {u, v}, {n, t}, {1, 5}] // 
+      TableForm\)], "Input",
+  CellLabel->"In[8]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["DDESymmetries[{dde1,dde2},{u,v},{n, t},{0,3}]//TableForm", "Input",
+  CellLabel->"In[10]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The Volterra equation", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(\(dde := 
+      \[PartialD]\_t u[n, t] - u[n, t]\ \((u[n + 1, t] - u[n - 1, t])\) == 0; 
+    \)\)], "Input",
+  CellLabel->"In[39]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(DDEInvariants[dde, u, {n, t}, {1, 5}] // TableForm\)], "Input",
+  CellLabel->"In[40]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["DDESymmetries[dde,u,{n,t},3]//TableForm", "Input",
+  CellLabel->"In[41]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["DDESymmetries[dde,u,{n,t},1,MaxExplicitDependency->1]", "Input",
+  CellLabel->"In[42]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Ablowitz-Ladik discretization of the NLS equation", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(dde1 := 
+      \[PartialD]\_t u[n, t] - \((u[n + 1, t] - 2\ u[n, t] + u[n - 1, t])\) - 
+          u[n, t]\ v[n, t]\ \((u[n + 1, t] + u[n - 1, t])\) == 0; \)\), 
+    \(\(dde2 := 
+      \[PartialD]\_t v[n, t] + \((v[n + 1, t] - 2\ v[n, t] + v[n - 1, t])\) + 
+          u[n, t]\ v[n, t]\ \((v[n + 1, t] + v[n - 1, t])\) == 0; \)\)}], 
+  "Input",
+  CellLabel->"In[43]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["DDEInvariants[{dde1,dde2},{u,v},{n,t},2]", "Input",
+  CellLabel->"In[45]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(DDEInvariants[{dde1, dde2}, {u, v}, {n, t}, 2, 
+      WeightRules -> {Weight[u] -> Weight[v]}]\)], "Input",
+  CellLabel->"In[46]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Parameterized Toda lattice", "Subsection",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[{
+    \(\(dde1 := 
+      \[PartialD]\_t u[n, t] - \[Alpha]\ v[n - 1, t] + v[n, t] == 0; \)\), 
+    \(\(dde2 := 
+      \[PartialD]\_t v[n, t] - 
+          v[n, t]\ \((\[Beta]\ u[n, t] - u[n + 1, t])\) == 0; \)\)}], "Input",\
+
+  CellLabel->"In[47]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell[BoxData[
+    \(DDEInvariants[{dde1, dde2}, {u, v}, {n, t}, {1, 3}] // TableForm\)], 
+  "Input",
+  CellLabel->"In[49]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"],
+
+Cell["DDESymmetries[{dde1,dde2},{u,v},{n,t},3] //TableForm", "Input",
+  CellLabel->"In[50]:=",
+  TextAlignment->Left,
+  TextJustification->1,
+  CellTags->"Examples"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Scope and Limitations", "Section",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  AspectRatioFixed->True,
+  CellTags->"Scope"],
+
+Cell[TextData[{
+  StyleBox["Integrability ",
+    FontSlant->"Italic"],
+  "can handle systems of evolution equations and first order DDEs that are \
+polynomial in the dependent variables. One space variable and one time \
+variable are allowed."
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Scope"],
+
+Cell["\<\
+Theoretically, there is no limit on the number of equations. In \
+practice, for large systems, the computations may take a long time or require \
+a lot of memory. Computational speed depends primarily on the amount of \
+memory.\
+\>", "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Scope"],
+
+Cell[TextData[{
+  "Only polynomial invariants and symmetries are computed. By design, ",
+  StyleBox["Integrability",
+    FontSlant->"Italic"],
+  " constructs only invariants and symmetries that are uniform in rank. The \
+uniform rank assumption allows one to compute independent invariants and \
+symmetries piece by piece, without having to split linear combinations. Due \
+to the superposition principle, a linear combination of invariants of unequal \
+rank is still an invariant. This situation arises frequently when parameters \
+with weights are introduced. "
+}], "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Scope"],
+
+Cell["\<\
+The systems may have parameters, which are assumed to be nonzero. \
+If a system has parameters, the program will compute the conditions for these \
+parameters so that invariants or symmetries of a given rank might exist. The \
+assumption that parameters are nonzero is necessary. As a result of setting \
+parameters to zero in an equation, the weights and therefore the ranks might \
+change.\
+\>", "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Scope"],
+
+Cell["\<\
+The assumption that the systems are uniform in rank is not very \
+restrictive. If the uniform rank condition is violated, users can introduce \
+parameters with weights. This also allows some flexibility in the form of the \
+invariants and symmetries such that invariants and symmetries may not be \
+uniform in rank. In cases where it is not clear whether or not parameters \
+with weights should be introduced, one should start without introducing any. \
+If this causes incompatibilities in the assignment of weights, program tries \
+to cure the incompatibility by introducing parameters with weights. In cases \
+of  persistent incompatibility, corresponding diagnostic messages are \
+printed.\
+\>", "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Scope"],
+
+Cell["\<\
+Negative weights on the dependent variables are not permitted. Zero \
+weights are allowed, but at least one of the dependent variables must have \
+positive weight. Fractional weights and ranks are permitted. In the case of \
+existence of free weights function calls are returned unevaluated.\
+\>", 
+  "Text",
+  CellMargins->{{10.75, 24.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  CellLabelMargins->{{11.5625, Inherited}, {Inherited, Inherited}},
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Scope"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Acknowledgements", "Section",
+  CellMargins->{{Inherited, 31.5}, {Inherited, Inherited}},
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  CellTags->"Acknowledgements"],
+
+Cell[TextData[{
+  "Thanks to R. Setinkaya, M. Ito, D. Lichtblau, J. Sanders, M. Trott, F. \
+Verheest, J.P. Wang, P. Winternitz, S. Wolfram for many valuable comments and \
+suggestions. ",
+  ButtonBox["National Science Foundation",
+    ButtonData:>{
+      URL[ "http://www.nsf.gov"], None},
+    ButtonStyle->"Hyperlink"],
+  " (USA) and ",
+  ButtonBox["Wolfram Research",
+    ButtonData:>{
+      URL[ "http://www.wolfram.com"], None},
+    ButtonStyle->"Hyperlink"],
+  ", Inc. are thanked for the support in development of this package."
+}], "Text",
+  CellMargins->{{Inherited, 31.5}, {Inherited, Inherited}},
+  Evaluatable->False,
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Acknowledgements"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["References",
+  FontWeight->"Bold"]], "Section",
+  CellMargins->{{Inherited, 27.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  FontWeight->"Plain",
+  CellTags->"References"],
+
+Cell[TextData[{
+  "M.J. Ablowitz and P.A. Clarkson, ",
+  StyleBox["Nonlinear Evolution Equations and Inverse Scattering",
+    FontSlant->"Italic"],
+  ", Cambridge University Press, Cambridge, 1991.\nU. Goktas and  W. Hereman, \
+",
+  StyleBox["Symbolic Computation of Conserved Densities for Systems of \
+Nonlinear Evolution Equations",
+    FontSlant->"Italic"],
+  ",  J. Symbolic Computation 24(5), 591-621, 1997.\nU. Goktas and  W. \
+Hereman, ",
+  StyleBox["Computation of Conservation Laws for Nonlinear Lattices",
+    FontSlant->"Italic"],
+  ",  Physica D 123(1-4) , 425-436 , 1998.\nU. Goktas and  W. Hereman, ",
+  StyleBox["Computation of Higher-order Symmetries for Nonlinear Evolution \
+and Lattice Equations",
+    FontSlant->"Italic"],
+  ",  Adv. Comput. Math. 11 , 55-80 , 1999.\nU. Goktas, W. Hereman and G. \
+Erdmann, ",
+  StyleBox["Symbolic Computation of Conserved Densities for Systems of \
+Nonlinear Differential-Difference Equations",
+    FontSlant->"Italic"],
+  ", Phys. Lett. A 236(1-2),  30-38, 1997.\nW. Hereman, U. Goktas, M. \
+Colagrosso and A. Miller, ",
+  StyleBox["Algorithmic Integrability Tests for", "SmallTextSans"],
+  StyleBox[" ",
+    FontSlant->"Italic"],
+  StyleBox["Nonlinear Differential and Lattice Equations", "SmallTextSans",
+    FontSlant->"Italic"],
+  ", Comput. Phys. Commun. 115(2-3),  428-446, 1998.\nM. Hickman and W. \
+Hereman, ",
+  StyleBox["Computation of Densities and Fluxes of Nonlinear \
+Differential-difference Equations",
+    FontSlant->"Italic"],
+  ",  Proc. Roy. Soc. London A 459 , 2705-2729, 2003.\nM. Ito, Comput. Phys. \
+Commun. 79 , 547-554, 1994.\nA.V. Mikhailov, A.B. Shabat and V.V. Sokolov, \
+Russian Math. Surveys 42, 1-63, 1987.\nP.J. Olver, ",
+  StyleBox["Applications of  Lie Groups to Differential Equations",
+    FontSlant->"Italic"],
+  ", Springer-Verlag, Berlin, 1986.\nS. Wolfram, ",
+  StyleBox["The Mathematica Book",
+    FontSlant->"Italic"],
+  ", Fifth Edition, Wolfram Media-Cambridge University Press, 2003."
+}], "Text",
+  CellMargins->{{Inherited, 27.125}, {Inherited, Inherited}},
+  Evaluatable->False,
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"References"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Contact Information", "Section",
+  CellMargins->{{Inherited, 31.5}, {Inherited, Inherited}},
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  CellTags->"Contact"],
+
+Cell[TextData[{
+  "For information about the features of ",
+  StyleBox["Integrability, ",
+    FontSlant->"Italic"],
+  "or in case of trouble, contact Willy Hereman by email: ",
+  ButtonBox["whereman@mines.edu",
+    ButtonData:>{
+      URL[ "mailto:whereman@mines.edu"], None},
+    ButtonStyle->"Hyperlink"],
+  " or mail to: Colorado School of Mines, Department of Mathematical and \
+Computer Sciences, Golden, Colorado 80401-1887, U.S.A. You can also reach me \
+by fax @ + 1-303-273-3875 (mention for Prof. Hereman) or by phone @ + \
+1-303-273-3881. Authors will greatly appreciate hearing your comments about \
+any of the material in the ",
+  StyleBox["Integrability",
+    FontSlant->"Italic"],
+  " package."
+}], "Text",
+  CellMargins->{{Inherited, 31.5}, {Inherited, Inherited}},
+  Evaluatable->False,
+  TextAlignment->Left,
+  TextJustification->1,
+  AspectRatioFixed->True,
+  CellTags->"Contact"]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"AllBrackets",
+PrintingStyleEnvironment->"EnhancedPrintout",
+WindowToolbars->{"RulerBar", "EditBar"},
+CellGrouping->Automatic,
+WindowSize->{1272, 907},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingStartingPageNumber->3,
+PrintingPageRange->{Automatic, Automatic},
+PageFooterLines->{True, True},
+PrintingOptions->{"PrintingMargins"->{{72, 54}, {72, 72}},
+"PrintCellBrackets"->False,
+"PrintRegistrationMarks"->False,
+"PrintMultipleHorizontalPages"->False},
+PrivateNotebookOptions->{"ColorPalette"->{RGBColor, 128}},
+ShowCellLabel->True,
+ShowCellTags->True,
+RenderingOptions->{"ObjectDithering"->True,
+"RasterDithering"->False},
+CharacterEncoding->"ISO8859-1",
+Magnification->1.5,
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Copyright"->{
+    Cell[2705, 80, 247, 5, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Copyright"],
+    Cell[2955, 87, 870, 23, 97, "Text",
+      Evaluatable->False,
+      CellTags->"Copyright"]},
+  "Introduction"->{
+    Cell[3862, 115, 386, 12, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Introduction"],
+    Cell[4251, 129, 1131, 24, 141, "Text",
+      Evaluatable->False,
+      CellTags->"Introduction"],
+    Cell[5385, 155, 852, 21, 135, "Text",
+      Evaluatable->False,
+      CellTags->"Introduction"],
+    Cell[6240, 178, 1075, 28, 119, "Text",
+      Evaluatable->False,
+      CellTags->"Introduction"]},
+  "Organization"->{
+    Cell[7352, 211, 266, 5, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Organization"],
+    Cell[7621, 218, 451, 15, 53, "Text",
+      Evaluatable->False,
+      CellTags->"Organization"],
+    Cell[8075, 235, 714, 22, 107, "Text",
+      Evaluatable->False,
+      CellTags->"Organization"],
+    Cell[8792, 259, 409, 12, 52, "Text",
+      CellTags->"Organization"],
+    Cell[9204, 273, 2768, 82, 347, "Text",
+      Evaluatable->False,
+      CellTags->"Organization"],
+    Cell[11975, 357, 420, 12, 52, "Text",
+      CellTags->"Organization"],
+    Cell[12398, 371, 2795, 83, 347, "Text",
+      Evaluatable->False,
+      CellTags->"Organization"],
+    Cell[15196, 456, 420, 12, 52, "Text",
+      CellTags->"Organization"],
+    Cell[15619, 470, 1964, 48, 285, "Text",
+      Evaluatable->False,
+      CellTags->"Organization"],
+    Cell[17586, 520, 406, 12, 52, "Text",
+      CellTags->"Organization"]},
+  "Loading"->{
+    Cell[18844, 554, 235, 5, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Loading"],
+    Cell[19082, 561, 585, 18, 53, "Text",
+      Evaluatable->False,
+      CellTags->"Loading"],
+    Cell[19670, 581, 208, 4, 62, "Input",
+      CellTags->"Loading"],
+    Cell[19881, 587, 245, 5, 75, "Text",
+      CellTags->"Loading"],
+    Cell[20129, 594, 300, 9, 61, "Input",
+      CellTags->"Loading"],
+    Cell[20432, 605, 633, 17, 75, "Text",
+      Evaluatable->False,
+      CellTags->"Loading"],
+    Cell[21068, 624, 798, 25, 75, "Text",
+      Evaluatable->False,
+      CellTags->"Loading"],
+    Cell[21869, 651, 215, 4, 62, "Input",
+      CellTags->"Loading"],
+    Cell[22087, 657, 825, 21, 97, "Text",
+      Evaluatable->False,
+      CellTags->"Loading"]},
+  "Palettes"->{
+    Cell[22949, 683, 170, 4, 114, "Section",
+      CellTags->"Palettes"],
+    Cell[23122, 689, 407, 12, 53, "Text",
+      Evaluatable->False,
+      CellTags->"Palettes"]},
+  "Examples"->{
+    Cell[23566, 706, 272, 7, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Examples"],
+    Cell[23841, 715, 364, 10, 53, "Text",
+      Evaluatable->False,
+      CellTags->"Examples"],
+    Cell[24208, 727, 348, 11, 61, "Input",
+      CellTags->"Examples"],
+    Cell[24581, 742, 125, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[24709, 747, 254, 7, 59, "Input",
+      CellTags->"Examples"],
+    Cell[24966, 756, 239, 6, 59, "Input",
+      CellTags->"Examples"],
+    Cell[25208, 764, 185, 6, 62, "Input",
+      CellTags->"Examples"],
+    Cell[25396, 772, 209, 7, 62, "Input",
+      CellTags->"Examples"],
+    Cell[25608, 781, 166, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[25777, 787, 166, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[25980, 796, 112, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[26095, 801, 407, 10, 85, "Input",
+      CellTags->"Examples"],
+    Cell[26505, 813, 180, 5, 59, "Input",
+      CellTags->"Examples"],
+    Cell[26722, 823, 129, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[26854, 828, 362, 8, 85, "Input",
+      CellTags->"Examples"],
+    Cell[27219, 838, 157, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[27379, 844, 203, 7, 62, "Input",
+      CellTags->"Examples"],
+    Cell[27619, 856, 124, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[27746, 861, 381, 8, 85, "Input",
+      CellTags->"Examples"],
+    Cell[28130, 871, 157, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[28290, 877, 193, 6, 62, "Input",
+      CellTags->"Examples"],
+    Cell[28520, 888, 116, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[28639, 893, 332, 8, 110, "Input",
+      CellTags->"Examples"],
+    Cell[28974, 903, 155, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[29132, 909, 191, 6, 62, "Input",
+      CellTags->"Examples"],
+    Cell[29326, 917, 206, 7, 62, "Input",
+      CellTags->"Examples"],
+    Cell[29569, 929, 109, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[29681, 934, 262, 7, 59, "Input",
+      CellTags->"Examples"],
+    Cell[29946, 943, 149, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[30098, 949, 160, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[30295, 958, 128, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[30426, 963, 437, 10, 59, "Input",
+      CellTags->"Examples"],
+    Cell[30866, 975, 147, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[31016, 981, 190, 6, 62, "Input",
+      CellTags->"Examples"],
+    Cell[31209, 989, 142, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[31354, 995, 189, 6, 62, "Input",
+      CellTags->"Examples"],
+    Cell[31580, 1006, 114, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[31697, 1011, 486, 11, 85, "Input",
+      CellTags->"Examples"],
+    Cell[32186, 1024, 168, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[32357, 1030, 197, 6, 59, "Input",
+      CellTags->"Examples"],
+    Cell[32591, 1041, 105, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[32699, 1046, 314, 8, 85, "Input",
+      CellTags->"Examples"],
+    Cell[33016, 1056, 199, 6, 59, "Input",
+      CellTags->"Examples"],
+    Cell[33218, 1064, 169, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[33424, 1073, 114, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[33541, 1078, 224, 7, 59, "Input",
+      CellTags->"Examples"],
+    Cell[33768, 1087, 179, 5, 59, "Input",
+      CellTags->"Examples"],
+    Cell[33950, 1094, 152, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[34105, 1100, 166, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[34308, 1109, 142, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[34453, 1114, 461, 11, 85, "Input",
+      CellTags->"Examples"],
+    Cell[34917, 1127, 153, 4, 62, "Input",
+      CellTags->"Examples"],
+    Cell[35073, 1133, 223, 6, 59, "Input",
+      CellTags->"Examples"],
+    Cell[35333, 1144, 119, 3, 77, "Subsection",
+      CellTags->"Examples"],
+    Cell[35455, 1149, 333, 10, 85, "Input",
+      CellTags->"Examples"],
+    Cell[35791, 1161, 196, 6, 59, "Input",
+      CellTags->"Examples"],
+    Cell[35990, 1169, 165, 4, 62, "Input",
+      CellTags->"Examples"]},
+  "Scope"->{
+    Cell[36204, 1179, 235, 5, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Scope"],
+    Cell[36442, 1186, 497, 13, 75, "Text",
+      Evaluatable->False,
+      CellTags->"Scope"],
+    Cell[36942, 1201, 493, 12, 75, "Text",
+      Evaluatable->False,
+      CellTags->"Scope"],
+    Cell[37438, 1215, 817, 17, 119, "Text",
+      Evaluatable->False,
+      CellTags->"Scope"],
+    Cell[38258, 1234, 657, 14, 97, "Text",
+      Evaluatable->False,
+      CellTags->"Scope"],
+    Cell[38918, 1250, 958, 18, 141, "Text",
+      Evaluatable->False,
+      CellTags->"Scope"],
+    Cell[39879, 1270, 560, 13, 75, "Text",
+      Evaluatable->False,
+      CellTags->"Scope"]},
+  "Acknowledgements"->{
+    Cell[40476, 1288, 175, 4, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Acknowledgements"],
+    Cell[40654, 1294, 733, 20, 75, "Text",
+      Evaluatable->False,
+      CellTags->"Acknowledgements"]},
+  "References"->{
+    Cell[41424, 1319, 277, 8, 114, "Section",
+      Evaluatable->False,
+      CellTags->"References"],
+    Cell[41704, 1329, 2181, 49, 463, "Text",
+      Evaluatable->False,
+      CellTags->"References"]},
+  "Contact"->{
+    Cell[43922, 1383, 169, 4, 114, "Section",
+      Evaluatable->False,
+      CellTags->"Contact"],
+    Cell[44094, 1389, 899, 23, 119, "Text",
+      Evaluatable->False,
+      CellTags->"Contact"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Copyright", 46299, 1450},
+  {"Introduction", 46515, 1457},
+  {"Organization", 46945, 1470},
+  {"Loading", 47872, 1497},
+  {"Palettes", 48651, 1521},
+  {"Examples", 48839, 1527},
+  {"Scope", 53043, 1644},
+  {"Acknowledgements", 53738, 1666},
+  {"References", 53972, 1673},
+  {"Contact", 54193, 1680}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 188, 3, 66, "Input"],
+Cell[1945, 56, 98, 2, 40, "Input"],
+Cell[2046, 60, 203, 4, 66, "Input"],
+Cell[2252, 66, 90, 2, 40, "Input"],
+Cell[2345, 70, 335, 6, 92, "Input"],
+
+Cell[CellGroupData[{
+Cell[2705, 80, 247, 5, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Copyright"],
+Cell[2955, 87, 870, 23, 97, "Text",
+  Evaluatable->False,
+  CellTags->"Copyright"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3862, 115, 386, 12, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Introduction"],
+Cell[4251, 129, 1131, 24, 141, "Text",
+  Evaluatable->False,
+  CellTags->"Introduction"],
+Cell[5385, 155, 852, 21, 135, "Text",
+  Evaluatable->False,
+  CellTags->"Introduction"],
+Cell[6240, 178, 1075, 28, 119, "Text",
+  Evaluatable->False,
+  CellTags->"Introduction"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7352, 211, 266, 5, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Organization"],
+Cell[7621, 218, 451, 15, 53, "Text",
+  Evaluatable->False,
+  CellTags->"Organization"],
+Cell[8075, 235, 714, 22, 107, "Text",
+  Evaluatable->False,
+  CellTags->"Organization"],
+Cell[8792, 259, 409, 12, 52, "Text",
+  CellTags->"Organization"],
+Cell[9204, 273, 2768, 82, 347, "Text",
+  Evaluatable->False,
+  CellTags->"Organization"],
+Cell[11975, 357, 420, 12, 52, "Text",
+  CellTags->"Organization"],
+Cell[12398, 371, 2795, 83, 347, "Text",
+  Evaluatable->False,
+  CellTags->"Organization"],
+Cell[15196, 456, 420, 12, 52, "Text",
+  CellTags->"Organization"],
+Cell[15619, 470, 1964, 48, 285, "Text",
+  Evaluatable->False,
+  CellTags->"Organization"],
+Cell[17586, 520, 406, 12, 52, "Text",
+  CellTags->"Organization"],
+Cell[17995, 534, 100, 2, 66, "Input"],
+Cell[18098, 538, 709, 11, 170, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[18844, 554, 235, 5, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Loading"],
+Cell[19082, 561, 585, 18, 53, "Text",
+  Evaluatable->False,
+  CellTags->"Loading"],
+Cell[19670, 581, 208, 4, 62, "Input",
+  CellTags->"Loading"],
+Cell[19881, 587, 245, 5, 75, "Text",
+  CellTags->"Loading"],
+Cell[20129, 594, 300, 9, 61, "Input",
+  CellTags->"Loading"],
+Cell[20432, 605, 633, 17, 75, "Text",
+  Evaluatable->False,
+  CellTags->"Loading"],
+Cell[21068, 624, 798, 25, 75, "Text",
+  Evaluatable->False,
+  CellTags->"Loading"],
+Cell[21869, 651, 215, 4, 62, "Input",
+  CellTags->"Loading"],
+Cell[22087, 657, 825, 21, 97, "Text",
+  Evaluatable->False,
+  CellTags->"Loading"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[22949, 683, 170, 4, 114, "Section",
+  CellTags->"Palettes"],
+Cell[23122, 689, 407, 12, 53, "Text",
+  Evaluatable->False,
+  CellTags->"Palettes"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[23566, 706, 272, 7, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Examples"],
+Cell[23841, 715, 364, 10, 53, "Text",
+  Evaluatable->False,
+  CellTags->"Examples"],
+Cell[24208, 727, 348, 11, 61, "Input",
+  CellTags->"Examples"],
+
+Cell[CellGroupData[{
+Cell[24581, 742, 125, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[24709, 747, 254, 7, 59, "Input",
+  CellTags->"Examples"],
+Cell[24966, 756, 239, 6, 59, "Input",
+  CellTags->"Examples"],
+Cell[25208, 764, 185, 6, 62, "Input",
+  CellTags->"Examples"],
+Cell[25396, 772, 209, 7, 62, "Input",
+  CellTags->"Examples"],
+Cell[25608, 781, 166, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[25777, 787, 166, 4, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[25980, 796, 112, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[26095, 801, 407, 10, 85, "Input",
+  CellTags->"Examples"],
+Cell[26505, 813, 180, 5, 59, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[26722, 823, 129, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[26854, 828, 362, 8, 85, "Input",
+  CellTags->"Examples"],
+Cell[27219, 838, 157, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[27379, 844, 203, 7, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[27619, 856, 124, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[27746, 861, 381, 8, 85, "Input",
+  CellTags->"Examples"],
+Cell[28130, 871, 157, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[28290, 877, 193, 6, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[28520, 888, 116, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[28639, 893, 332, 8, 110, "Input",
+  CellTags->"Examples"],
+Cell[28974, 903, 155, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[29132, 909, 191, 6, 62, "Input",
+  CellTags->"Examples"],
+Cell[29326, 917, 206, 7, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[29569, 929, 109, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[29681, 934, 262, 7, 59, "Input",
+  CellTags->"Examples"],
+Cell[29946, 943, 149, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[30098, 949, 160, 4, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30295, 958, 128, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[30426, 963, 437, 10, 59, "Input",
+  CellTags->"Examples"],
+Cell[30866, 975, 147, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[31016, 981, 190, 6, 62, "Input",
+  CellTags->"Examples"],
+Cell[31209, 989, 142, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[31354, 995, 189, 6, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[31580, 1006, 114, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[31697, 1011, 486, 11, 85, "Input",
+  CellTags->"Examples"],
+Cell[32186, 1024, 168, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[32357, 1030, 197, 6, 59, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[32591, 1041, 105, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[32699, 1046, 314, 8, 85, "Input",
+  CellTags->"Examples"],
+Cell[33016, 1056, 199, 6, 59, "Input",
+  CellTags->"Examples"],
+Cell[33218, 1064, 169, 4, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[33424, 1073, 114, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[33541, 1078, 224, 7, 59, "Input",
+  CellTags->"Examples"],
+Cell[33768, 1087, 179, 5, 59, "Input",
+  CellTags->"Examples"],
+Cell[33950, 1094, 152, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[34105, 1100, 166, 4, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[34308, 1109, 142, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[34453, 1114, 461, 11, 85, "Input",
+  CellTags->"Examples"],
+Cell[34917, 1127, 153, 4, 62, "Input",
+  CellTags->"Examples"],
+Cell[35073, 1133, 223, 6, 59, "Input",
+  CellTags->"Examples"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[35333, 1144, 119, 3, 77, "Subsection",
+  CellTags->"Examples"],
+Cell[35455, 1149, 333, 10, 85, "Input",
+  CellTags->"Examples"],
+Cell[35791, 1161, 196, 6, 59, "Input",
+  CellTags->"Examples"],
+Cell[35990, 1169, 165, 4, 62, "Input",
+  CellTags->"Examples"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[36204, 1179, 235, 5, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Scope"],
+Cell[36442, 1186, 497, 13, 75, "Text",
+  Evaluatable->False,
+  CellTags->"Scope"],
+Cell[36942, 1201, 493, 12, 75, "Text",
+  Evaluatable->False,
+  CellTags->"Scope"],
+Cell[37438, 1215, 817, 17, 119, "Text",
+  Evaluatable->False,
+  CellTags->"Scope"],
+Cell[38258, 1234, 657, 14, 97, "Text",
+  Evaluatable->False,
+  CellTags->"Scope"],
+Cell[38918, 1250, 958, 18, 141, "Text",
+  Evaluatable->False,
+  CellTags->"Scope"],
+Cell[39879, 1270, 560, 13, 75, "Text",
+  Evaluatable->False,
+  CellTags->"Scope"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[40476, 1288, 175, 4, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Acknowledgements"],
+Cell[40654, 1294, 733, 20, 75, "Text",
+  Evaluatable->False,
+  CellTags->"Acknowledgements"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[41424, 1319, 277, 8, 114, "Section",
+  Evaluatable->False,
+  CellTags->"References"],
+Cell[41704, 1329, 2181, 49, 463, "Text",
+  Evaluatable->False,
+  CellTags->"References"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[43922, 1383, 169, 4, 114, "Section",
+  Evaluatable->False,
+  CellTags->"Contact"],
+Cell[44094, 1389, 899, 23, 119, "Text",
+  Evaluatable->False,
+  CellTags->"Contact"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
